@@ -10,8 +10,7 @@ export default function LoginForm({ router }) {
   const handleMicrosoftClick = () => {
     console.log("user clicked sign in!");
     signInWithRedirect(auth, provider)
-      .then((user) => {
-        console.log("USER SIGNED IN", user);
+      .then(() => {
         router.push("/");
       })
       .catch((error) => {
