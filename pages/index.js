@@ -3,8 +3,8 @@ import UserContext from "../contexts/userContext";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import SpinnerFullScreen from "../components/SpinnerFullScreen";
-import Container from "../components/Layout/Container";
-import QuickLinkCard from "../components/Cards/QuickLinkCard";
+import Container from "../components/layout/Container";
+import QuickLinkCard from "../components/cards/QuickLinkCard";
 import CardGrid from "../components/layout/CardGrid";
 import ThemeH2 from "../components/typography/ThemeH2";
 

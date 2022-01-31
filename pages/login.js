@@ -1,6 +1,6 @@
 import PageLayout from "../components/layout/PageLayout";
 import LoginForm from "../components/login/LoginForm";
-import Container from "../components/Layout/Container";
+import Container from "../components/layout/Container";
 import ThemeH1 from "../components/typography/ThemeH1";
 import SignOutLogo from "../public/icons/sign-out-alt-solid.svg";
 import { useRouter } from "next/router";
