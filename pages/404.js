@@ -1,10 +1,10 @@
-import Layout from "../components/Layout";
-import H1 from "../components/typography/H1";
+import PageLayout from "../components/layout/PageLayout";
+import ThemeH1 from "../components/typography/ThemeH1";
 
 export default function FourOFour() {
   return (
-    <Layout>
-      <H1 className="text-center">404</H1>
-    </Layout>
+    <PageLayout>
+      <ThemeH1 className="text-center">404</ThemeH1>
+    </PageLayout>
   );
 }

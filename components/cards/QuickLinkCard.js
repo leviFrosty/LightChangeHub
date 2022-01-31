@@ -1,5 +1,5 @@
 import Image from "next/image";
-import H2 from "../typography/H2";
+import ThemeH2 from "../typography/ThemeH2";
 import normalizeCardTitle from "../../lib/text_formatting/normalizeCardTitle";
 
 export default function QuickLinkCard({ title, link, iconLink, description }) {
@@ -11,7 +11,9 @@ export default function QuickLinkCard({ title, link, iconLink, description }) {
       target="_blank"
     >
       <div className="flex flex-col gap-2 max-w-[200px]">
-        <H2 className="mx-auto break-all">{normalizeCardTitle(title)}</H2>
+        <ThemeH2 className="mx-auto break-all">
+          {normalizeCardTitle(title)}
+        </ThemeH2>
         <div className="relative h-10">
           <Image src={iconLink} alt={title} layout="fill" />
         </div>

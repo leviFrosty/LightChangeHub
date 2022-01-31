@@ -1,6 +1,6 @@
 import { signInWithRedirect, OAuthProvider } from "firebase/auth";
 import { auth } from "../../lib/fbInstance";
-import Button from "../typography/Button";
+import ThemeButton from "../typography/ThemeButton";
 
 export default function LoginForm({ router }) {
   const provider = new OAuthProvider("microsoft.com");
@@ -22,12 +22,12 @@ export default function LoginForm({ router }) {
 
   return (
     <div>
-      <Button
+      <ThemeButton
         className="bg-bg-darker shadow-md text-text-light"
         onClick={handleMicrosoftClick}
       >
         Sign in with Microsoft
-      </Button>
+      </ThemeButton>
     </div>
   );
 }

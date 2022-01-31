@@ -1,12 +1,12 @@
 import ToggleTheme from "../theme/ToggleTheme";
 import SignOutLogo from "../../public/icons/sign-out-alt-solid.svg";
-import Button from "../typography/Button";
+import ThemeButton from "../typography/ThemeButton";
 import { useRouter } from "next/router";
 import { signOutUser } from "../../lib/signOutUser";
 import { useContext } from "react";
 import UserContext from "../../contexts/userContext";
 
-export default function Nav() {
+export default function NavBar() {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
@@ -29,17 +29,17 @@ export default function Nav() {
           </span>
         ) : null}
         {user ? (
-          <Button
+          <ThemeButton
             title="Sign Out"
             className="dark:bg-bg-dark "
             onClick={() => signOutUser(router)}
           >
             <SignOutLogo className="h-6 w-6 inline text-text-light hover:opacity-70" />
-          </Button>
+          </ThemeButton>
         ) : null}
-        <Button title="Toggle Theme" className="dark:bg-bg-dark">
+        <ThemeButton title="Toggle Theme" className="dark:bg-bg-dark">
           <ToggleTheme className="h-5 w-5 hover:opacity-70" />
-        </Button>
+        </ThemeButton>
       </div>
     </nav>
   );

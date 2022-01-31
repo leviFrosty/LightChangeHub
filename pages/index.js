@@ -1,13 +1,12 @@
-import Layout from "../components/layout/Index";
-import H2 from "../components/typography/H2";
-import LoginForm from "../components/login/Index";
+import PageLayout from "../components/layout/PageLayout";
 import UserContext from "../contexts/userContext";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import H1 from "../components/typography/H1";
-import Spinner from "../components/Spinner";
 import SpinnerFullScreen from "../components/SpinnerFullScreen";
 import Container from "../components/Layout/Container";
+import QuickLinkCard from "../components/Cards/QuickLinkCard";
+import CardGrid from "../components/layout/CardGrid";
+import ThemeH2 from "../components/typography/ThemeH2";
 
 export default function Home() {
   const { user, isLoading } = useContext(UserContext);
@@ -22,14 +21,36 @@ export default function Home() {
   }, [isLoading]);
 
   return (
-    <Layout home>
+    <PageLayout home>
       {isLoading || user === null ? (
         <SpinnerFullScreen />
       ) : (
-        <Container className="max-w-full">
-          <H2>Quick Links</H2>
+        <Container className="max-w-full flex-col relative">
+          <div></div>
+          <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col w-full md:pr-2 md:border-r-2 border-text-light border-opacity-10">
+              <ThemeH2>Quick Links</ThemeH2>
+              <CardGrid>
+                <QuickLinkCard
+                  title="Datto RMM"
+                  link="https://concordrmm.centrastage.net/dashboard"
+                  iconLink="https://firebasestorage.googleapis.com/v0/b/lightchangehub.appspot.com/o/icons%2Fdatto-logo-blue-datto.0f6cddcb.svg?alt=media&token=52a335ae-4fb2-4432-a890-e59404557a0d"
+                />
+              </CardGrid>
+            </div>
+            <div className="flex flex-col md:pl-2 w-full">
+              <ThemeH2>Citizens Financial</ThemeH2>
+              <CardGrid>
+                <QuickLinkCard
+                  title="Datto RMM"
+                  link="https://concordrmm.centrastage.net/dashboard"
+                  iconLink="https://firebasestorage.googleapis.com/v0/b/lightchangehub.appspot.com/o/icons%2Fdatto-logo-blue-datto.0f6cddcb.svg?alt=media&token=52a335ae-4fb2-4432-a890-e59404557a0d"
+                />
+              </CardGrid>
+            </div>
+          </div>
         </Container>
       )}
-    </Layout>
+    </PageLayout>
   );
 }

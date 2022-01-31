@@ -10,7 +10,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     // Handles tailwindcss theme
-    console.log(localStorage.getItem("theme"));
     if (localStorage.getItem("theme") === null) {
       localStorage.setItem("theme", "dark");
     }

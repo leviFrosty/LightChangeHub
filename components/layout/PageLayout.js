@@ -1,13 +1,13 @@
 import Footer from "./Footer";
-import Nav from "./Nav";
+import NavBar from "./NavBar";
 import React from "react";
 import GoHome from "../GoHome";
 
-export default function Layout({ home, children }) {
+export default function PageLayout({ home, children }) {
   return (
     <React.Fragment>
       <div className="flex flex-col dark:bg-bg-darker min-h-screen">
-        <Nav />
+        <NavBar />
         <main className="flex-grow">{children}</main>
         {!home && <GoHome />}
         <Footer />
