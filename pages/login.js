@@ -18,7 +18,7 @@ export default function login() {
     if (!isLoading) {
       if (user) router.replace("/");
     }
-  }, [isLoading]);
+  }, [isLoading, user]);
 
   return (
     <Layout>
