@@ -18,7 +18,7 @@ export default function Home() {
         router.push("/login");
       }
     }
-  }, [isLoading]);
+  }, [isLoading, user]);
 
   return (
     <PageLayout home>
