@@ -1,13 +1,12 @@
 import ThemeH2 from "../typography/ThemeH2";
 import TimesIcon from "../../public/icons/times-solid.svg";
 import ImageInput from "../typography/ImageInput";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { db, storage } from "../../lib/fbInstance";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import Card from "../../classes/cards/card";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import Spinner from "../Spinner";
-import { quicklinksId } from "../../pages";
 
 export default function NewCard({
   isNewCardOpen,
@@ -109,7 +108,6 @@ export default function NewCard({
     setcard(obj);
   };
 
-
   return (
     <div
       className={`bg-bg-dark rounded-lg px-4 py-4 pb-5 mb-4 ${className} text-text-light`}
@@ -155,6 +153,7 @@ export default function NewCard({
           required
           className="bg-bg-darker hover:bg-neutral-900 transition-colors rounded-lg px-4 py-1"
         >
+          <option value="">-- Select Category --</option>
           {customers.map((customer) => (
             <option key={customer.id} value={JSON.stringify(customer)}>
               {customer.name}
