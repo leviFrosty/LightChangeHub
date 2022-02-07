@@ -12,6 +12,7 @@ export default function ToggleTheme({ className, ...props }) {
     } else {
       localStorage.setItem("theme", "dark");
     }
+    location.reload();
   };
 
   // Sets loaded state to "theme" from localstorage
