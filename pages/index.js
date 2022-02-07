@@ -10,9 +10,17 @@ import ThemeH2 from "../components/typography/ThemeH2";
 import PlusIcon from "../public/icons/plus-solid.svg";
 import NewCard from "../components/cards/NewCard";
 import { db } from "../lib/fbInstance";
-import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import CompanyCardsSection from "../components/cards/CompanyCardsSection";
 import Head from "next/head";
+import sortCardsAlphabetical from "../lib/sorting/sortCardsAlphabetical";
 export const quicklinksId = "quicklinks";
 export const SITE_TITLE_PREFIX = "LightChange Hub -";
 
@@ -23,6 +31,31 @@ export default function Home({ cards, customers }) {
   const [otherCards, setotherCards] = useState([]);
   const router = useRouter();
 
+  const diveyOutCards = (allCards) => {
+    const filteredArray = allCards.filter(
+      (card) => card.customer.id == quicklinksId
+    );
+    const filteredotherCards = allCards.filter(
+      (obj) => obj.customer.id !== quicklinksId
+    );
+
+    setquickLinks(sortCardsAlphabetical(filteredArray));
+    setotherCards(filteredotherCards);
+  };
+
+  useEffect(() => {
+    const q = query(collection(db, "cards"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const fetchedCards = [];
+      querySnapshot.forEach((doc) => {
+        fetchedCards.push(doc.data());
+      });
+      diveyOutCards(fetchedCards);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   useEffect(() => {
     if (isLoading === false) {
       if (!user) {
@@ -32,14 +65,7 @@ export default function Home({ cards, customers }) {
   }, [isLoading, user, router]);
 
   useEffect(() => {
-    const filteredArray = cards.filter(
-      (card) => card.customer.id == quicklinksId
-    );
-    const filteredotherCards = cards.filter(
-      (obj) => obj.customer.id !== quicklinksId
-    );
-    setquickLinks(filteredArray);
-    setotherCards(filteredotherCards);
+    diveyOutCards(cards);
   }, [cards]);
 
   return (
@@ -80,6 +106,7 @@ export default function Home({ cards, customers }) {
               <CardGrid>
                 {quickLinks.map((quickLink) => (
                   <QuickLinkCard
+                    cardId={quickLink.id}
                     key={quickLink.id}
                     title={quickLink.name}
                     link={quickLink.link}
