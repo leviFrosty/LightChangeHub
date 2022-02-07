@@ -1,8 +1,9 @@
 import Image from "next/image";
 import ThemeH2 from "../typography/ThemeH2";
 import normalizeCardTitle from "../../lib/text_formatting/normalizeCardTitle";
+import WarningTriangle from "../../public/icons/exclamation-triangle-solid.svg";
 
-export default function QuickLinkCard({ title, link, iconLink, description }) {
+export default function QuickLinkCard({ title, link, iconLink }) {
   return (
     <a
       className="bg-bg-dark px-3 pt-4 pb-5 rounded-lg hover:opacity-60 transition-opacity"
@@ -14,8 +15,12 @@ export default function QuickLinkCard({ title, link, iconLink, description }) {
         <ThemeH2 className="mx-auto break-all">
           {normalizeCardTitle(title)}
         </ThemeH2>
-        <div className="relative h-10">
-          <Image src={iconLink} alt={title} layout="fill" />
+        <div className="relative h-10 text-text-light">
+          {iconLink ? (
+            <Image src={iconLink} alt={title} layout="fill" />
+          ) : (
+            <WarningTriangle className="h-10 text-text-light" />
+          )}
         </div>
       </div>
     </a>
