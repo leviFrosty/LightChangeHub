@@ -31,7 +31,7 @@ export default function Login() {
         {isLoading ? (
           <SpinnerFullScreen />
         ) : (
-          <div className="flex flex-col items-center dark:bg-bg-dark bg-slate-700 rounded-lg px-20 pb-32 pt-10 shadow-lg">
+          <div className="flex flex-col items-center dark:bg-bg-dark bg-slate-200 rounded-lg px-20 pb-32 pt-10 shadow-lg">
             <ThemeH1 className="mb-10 text-white">Login</ThemeH1>
             <div className="flex flex-col gap-3 mt-10">
               <LoginForm router={router} />

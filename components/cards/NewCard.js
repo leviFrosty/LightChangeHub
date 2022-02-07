@@ -110,7 +110,7 @@ export default function NewCard({
 
   return (
     <div
-      className={`bg-bg-dark rounded-lg px-4 py-4 pb-5 mb-4 ${className} text-text-light`}
+      className={`dark:bg-bg-dark bg-slate-200 rounded-lg px-4 py-4 pb-5 mb-4 ${className} text-text-light`}
       {...props}
     >
       <div className="flex flex-col">
@@ -144,7 +144,9 @@ export default function NewCard({
         </div>
       </div>
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label htmlFor="cardName">Category</label>
+        <label className="dark:text-text-light text-bg-dark" htmlFor="cardName">
+          Category
+        </label>
         <select
           type="text"
           name="cardName"
@@ -160,7 +162,9 @@ export default function NewCard({
             </option>
           ))}
         </select>
-        <label htmlFor="cardName">Name</label>
+        <label className="dark:text-text-light text-bg-dark" htmlFor="cardName">
+          Name
+        </label>
         <input
           type="text"
           name="cardName"
@@ -169,7 +173,9 @@ export default function NewCard({
           required
           className="bg-bg-darker hover:bg-neutral-900 transition-colors rounded-lg px-4 py-1"
         />
-        <label htmlFor="cardLink">Link</label>
+        <label className="dark:text-text-light text-bg-dark" htmlFor="cardLink">
+          Link
+        </label>
         <input
           type="text"
           name="cardLink"
@@ -178,7 +184,9 @@ export default function NewCard({
           required
           className="bg-bg-darker hover:bg-neutral-900 transition-colors rounded-lg px-4 py-1"
         />
-        <label htmlFor="cardLink">Icon</label>
+        <label className="dark:text-text-light text-bg-dark" htmlFor="cardLink">
+          Icon
+        </label>
         <ImageInput
           title="Image"
           name="icon"

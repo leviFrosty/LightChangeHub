@@ -22,7 +22,7 @@ export default function NavBar() {
         LightChange
         <span className="pl-2 dark:text-white text-bg-dark">Hub</span>
       </button>
-      <div className="flex flex-col md:flex-row gap-1 items-center">
+      <div className="flex flex-col md:flex-row gap-2 items-center">
         {user ? (
           <span className="dark:text-text-light text-bg-dark">
             {user.displayName}
@@ -31,14 +31,17 @@ export default function NavBar() {
         {user ? (
           <ThemeButton
             title="Sign Out"
-            className="dark:bg-bg-dark "
+            className="dark:bg-bg-dark bg-slate-200"
             onClick={() => signOutUser(router)}
           >
-            <SignOutLogo className="h-6 w-6 inline text-text-light hover:opacity-70" />
+            <SignOutLogo className="h-6 w-6 inline dark:text-text-light text-bg-dark  hover:opacity-70" />
           </ThemeButton>
         ) : null}
-        <ThemeButton title="Toggle Theme" className="dark:bg-bg-dark">
-          <ToggleTheme className="h-5 w-5 hover:opacity-70" />
+        <ThemeButton
+          title="Toggle Theme"
+          className="dark:bg-bg-dark bg-slate-200"
+        >
+          <ToggleTheme className="h-5 w-5 dark:text-text-light text-bg-dark  hover:opacity-70" />
         </ThemeButton>
       </div>
     </nav>
