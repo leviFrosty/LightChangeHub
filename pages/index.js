@@ -21,6 +21,7 @@ import {
 import CompanyCardsSection from "../components/cards/CompanyCardsSection";
 import Head from "next/head";
 import sortCardsAlphabetical from "../lib/sorting/sortCardsAlphabetical";
+import sortCustomersAlphabetical from "../lib/sorting/sortCustomerAlphabetical";
 export const quicklinksId = "quicklinks";
 export const SITE_TITLE_PREFIX = "LightChange Hub -";
 
@@ -29,6 +30,7 @@ export default function Home({ cards, customers }) {
   const [isNewCardOpen, setisNewCardOpen] = useState(false);
   const [quickLinks, setquickLinks] = useState([]);
   const [otherCards, setotherCards] = useState([]);
+  const [sortedCustomers, setsortedCustomers] = useState([]);
   const router = useRouter();
 
   const diveyOutCards = (allCards) => {
@@ -54,6 +56,10 @@ export default function Home({ cards, customers }) {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    setsortedCustomers(sortCustomersAlphabetical(customers));
   }, []);
 
   useEffect(() => {
@@ -93,7 +99,7 @@ export default function Home({ cards, customers }) {
           <div className="flex flex-row justify-center">
             {isNewCardOpen ? (
               <NewCard
-                customers={customers}
+                customers={sortedCustomers}
                 className="max-w-2xl"
                 setisNewCardOpen={setisNewCardOpen}
                 isNewCardOpen={isNewCardOpen}
@@ -116,7 +122,7 @@ export default function Home({ cards, customers }) {
               </CardGrid>
             </div>
             <div className="flex flex-col md:pl-2 w-full">
-              {customers
+              {sortedCustomers
                 .filter((customer) => customer.id !== quicklinksId)
                 .map((customer) => (
                   <CompanyCardsSection
