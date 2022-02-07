@@ -6,7 +6,7 @@ import ChevronRight from "../../public/icons/chevron-right-solid.svg";
 import QuickLinkCard from "./QuickLinkCard";
 
 export default function CompanyCardsSection({ customer, cards }) {
-  const [isopen, setisopen] = useState(true);
+  const [isopen, setisopen] = useState(false);
   const [customerCards, setcustomerCards] = useState([]);
 
   useEffect(() => {
