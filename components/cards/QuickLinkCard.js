@@ -15,9 +15,11 @@ export default function QuickLinkCard({ title, link, iconLink }) {
         <ThemeH2 className="mx-auto break-all">
           {normalizeCardTitle(title)}
         </ThemeH2>
-        <div className="relative h-10 text-text-light">
+        <div className="relative text-text-light flex flex-row justify-center">
           {iconLink ? (
-            <Image src={iconLink} alt={title} layout="fill" />
+            <div className="h-12 w-12 relative">
+              <Image src={iconLink} alt={title} layout="fill" />
+            </div>
           ) : (
             <WarningTriangle className="h-10 text-text-light" />
           )}
