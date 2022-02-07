@@ -12,12 +12,14 @@ import NewCard from "../components/cards/NewCard";
 import { db } from "../lib/fbInstance";
 import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import CompanyCardsSection from "../components/cards/CompanyCardsSection";
+import Head from "next/head";
 export const quicklinksId = "quicklinks";
+export const SITE_TITLE_PREFIX = "LightChange Hub -";
 
 export default function Home({ cards, customers }) {
   const { user, isLoading } = useContext(UserContext);
   const [isNewCardOpen, setisNewCardOpen] = useState(false);
-  const [quickLinks, setquickLinks] = useState({});
+  const [quickLinks, setquickLinks] = useState([]);
   const [otherCards, setotherCards] = useState([]);
   const router = useRouter();
 
@@ -27,21 +29,24 @@ export default function Home({ cards, customers }) {
         router.push("/login");
       }
     }
-  }, [isLoading, user]);
+  }, [isLoading, user, router]);
 
   useEffect(() => {
     const filteredArray = cards.filter(
       (card) => card.customer.id == quicklinksId
     );
-    setquickLinks(filteredArray);
     const filteredotherCards = cards.filter(
       (obj) => obj.customer.id !== quicklinksId
     );
+    setquickLinks(filteredArray);
     setotherCards(filteredotherCards);
-  }, []);
+  }, [cards]);
 
   return (
     <PageLayout home>
+      <Head>
+        <title>{SITE_TITLE_PREFIX} Dashboard</title>
+      </Head>
       {isLoading || user === null ? (
         <SpinnerFullScreen />
       ) : (
