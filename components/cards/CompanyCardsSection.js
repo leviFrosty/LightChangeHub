@@ -41,6 +41,7 @@ export default function CompanyCardsSection({ customer, cards }) {
         <CardGrid>
           {customerCards.map((card) => (
             <QuickLinkCard
+              cardId={card.id}
               key={card.id}
               title={card.name}
               link={card.link}
