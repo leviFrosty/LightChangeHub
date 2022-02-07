@@ -9,6 +9,8 @@ import ThemeButton from "../components/typography/ThemeButton";
 import { useContext, useEffect } from "react";
 import UserContext from "../contexts/userContext";
 import SpinnerFullScreen from "../components/SpinnerFullScreen";
+import Head from "next/head";
+import { SITE_TITLE_PREFIX } from ".";
 
 export default function Login() {
   const { user, isLoading } = useContext(UserContext);
@@ -22,6 +24,9 @@ export default function Login() {
 
   return (
     <PageLayout>
+      <Head>
+        <title>{SITE_TITLE_PREFIX} Login</title>
+      </Head>
       <Container className="items-center justify-center">
         {isLoading ? (
           <SpinnerFullScreen />
