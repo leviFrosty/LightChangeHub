@@ -30,12 +30,14 @@ export default function Login() {
             <ThemeH1 className="mb-10 text-white">Login</ThemeH1>
             <div className="flex flex-col gap-3 mt-10">
               <LoginForm router={router} />
-              <ThemeButton
-                className="bg-bg-darker shadow-md text-text-light"
-                onClick={() => signOutUser(router)}
-              >
-                Sign out <SignOutLogo className="h-5 w-5 inline" />
-              </ThemeButton>
+              {user ? (
+                <ThemeButton
+                  className="bg-bg-darker shadow-md text-text-light"
+                  onClick={() => signOutUser(router)}
+                >
+                  Sign out <SignOutLogo className="h-5 w-5 inline" />
+                </ThemeButton>
+              ) : null}
             </div>
           </div>
         )}
