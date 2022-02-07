@@ -9,7 +9,7 @@ import { db } from "../../lib/fbInstance";
 export default function QuickLinkCard({ cardId, title, link, iconLink }) {
   const deleteCard = async () => {
     const isUserSure = window.confirm(
-      "Are you sure you want to delete the card?"
+      `Are you sure you want to delete ${title}?\nSite link: ${link}`
     );
     if (!isUserSure) return;
     const docRef = doc(db, "cards", cardId);
