@@ -19,7 +19,7 @@ export default function CompanyCardsSection({ customer, cards }) {
   }, [cards, customer.id]);
 
   return (
-    <React.Fragment>
+    <div className="mb-1">
       <div>
         <button
           className={`transition-opacity ${
@@ -27,7 +27,7 @@ export default function CompanyCardsSection({ customer, cards }) {
           }`}
           onClick={() => setisopen(!isopen)}
         >
-          <ThemeH2>
+          <ThemeH2 className="whitespace-pre-wrap text-left">
             {customer.name}
             <ChevronRight
               className={`ml-2 w-4 h-4 transition-transform inline ${
@@ -57,6 +57,6 @@ export default function CompanyCardsSection({ customer, cards }) {
           </CardGrid>
         </React.Fragment>
       ) : null}
-    </React.Fragment>
+    </div>
   );
 }
