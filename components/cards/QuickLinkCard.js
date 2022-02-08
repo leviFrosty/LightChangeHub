@@ -36,6 +36,7 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
       href={link}
       rel="noreferrer"
       target="_blank"
+      draggable={false}
     >
       <div className="absolute top-1 right-2 flex flex-row gap-1 items-center">
         <button
