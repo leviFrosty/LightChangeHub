@@ -38,17 +38,24 @@ export default function CompanyCardsSection({ customer, cards }) {
         </button>
       </div>
       {isopen ? (
-        <CardGrid>
-          {customerCards.map((card) => (
-            <QuickLinkCard
-              cardId={card.id}
-              key={card.id}
-              title={card.name}
-              link={card.link}
-              iconLink={card.image}
-            />
-          ))}
-        </CardGrid>
+        <React.Fragment>
+          {customerCards.length === 0 ? (
+            <p className="dark:text-text-light text-bg-dark opacity-70 w-full">
+              There are no cards for {customer.name}! 😭
+            </p>
+          ) : null}
+          <CardGrid>
+            {customerCards.map((card) => (
+              <QuickLinkCard
+                cardId={card.id}
+                key={card.id}
+                title={card.name}
+                link={card.link}
+                iconLink={card.image}
+              />
+            ))}
+          </CardGrid>
+        </React.Fragment>
       ) : null}
     </React.Fragment>
   );
