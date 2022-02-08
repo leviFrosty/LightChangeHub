@@ -80,7 +80,7 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
               handleTitleSave();
               setisediting(!isediting);
             }}
-            className="w-full"
+            className="w-full my-2"
           >
             <input
               type="text"
