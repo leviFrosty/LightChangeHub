@@ -68,7 +68,7 @@ export default function CardSearchBar({ cards }) {
                   key={hit.id}
                   cardId={hit.id}
                   link={hit.link}
-                  iconLink={hit.iconLink}
+                  iconLink={hit.image}
                 />
               ))}
             </div>
