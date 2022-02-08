@@ -5,6 +5,7 @@ import WarningTriangle from "../../public/icons/exclamation-triangle-solid.svg";
 import Times from "../../public/icons/times-solid.svg";
 import Pencil from "../../public/icons/pencil-alt-solid.svg";
 import Floppy from "../../public/icons/save-solid.svg";
+import CopySolid from "../../public/icons/copy-solid.svg";
 import { doc, deleteDoc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../lib/fbInstance";
 import { useState } from "react";
@@ -12,6 +13,7 @@ import { useState } from "react";
 export default function QuickLinkCard({ cardId, title, link, iconLink }) {
   const [isediting, setisediting] = useState(false);
   const [editedTitle, seteditedTitle] = useState(title);
+  const [iscopied, setiscopied] = useState(false);
 
   const handleTitleSave = async () => {
     if (editedTitle === title) return;
@@ -39,6 +41,26 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
       draggable={false}
     >
       <div className="absolute top-1 right-2 flex flex-row gap-1 items-center">
+        <div className="relative">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              navigator.clipboard.writeText(link);
+              // Enables copy state then 300ms later disables
+              setiscopied(true);
+              setTimeout(() => {
+                setiscopied(false);
+              }, 300);
+            }}
+            // Creates seudo element after button to display the copy state and tooltip
+            className={`after:absolute after:-top-6 after:-left-4 after:rounded-lg after:opacity-0 hover:after:opacity-100 after:px-2 ${
+              iscopied ? "after:content-['Copied!']" : "after:content-['Copy']"
+            } after:block after:bg-lc-green after:text-text-light after:font-semibold opacity-30 hover:opacity-100 dark:text-text-light transition-opacity`}
+          >
+            <CopySolid className="w-4 h-4" />
+          </button>
+        </div>
         <button
           onClick={(e) => {
             e.stopPropagation();
