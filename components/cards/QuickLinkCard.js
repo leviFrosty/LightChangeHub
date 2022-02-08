@@ -32,8 +32,8 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
 
   return (
     <a
-      className={`relative dark:bg-bg-dark bg-slate-200 px-3 pt-3 pb-4  rounded-lg ${
-        isediting ? "hover:opacity-100" : "hover:opacity-60"
+      className={`relative dark:bg-bg-dark bg-slate-200 px-3 pt-3 pb-4 opacity-80 rounded-lg ${
+        isediting ? "hover:opacity-80" : "hover:opacity-100"
       } transition-opacity`}
       href={link}
       rel="noreferrer"

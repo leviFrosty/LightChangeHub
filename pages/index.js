@@ -75,7 +75,7 @@ export default function Home({ cards, customers }) {
   }, [cards]);
 
   return (
-    <PageLayout home>
+    <PageLayout home cards={cards}>
       <Head>
         <title>{SITE_TITLE_PREFIX} Dashboard</title>
       </Head>

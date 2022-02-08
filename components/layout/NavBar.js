@@ -5,13 +5,14 @@ import { useRouter } from "next/router";
 import { signOutUser } from "../../lib/signOutUser";
 import { useContext } from "react";
 import UserContext from "../../contexts/userContext";
+import CardSearchBar from "../search/CardSearchBar";
 
-export default function NavBar() {
+export default function NavBar({ cards }) {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
   return (
-    <nav className="flex flex-col md:flex-row justify-between items-center my-5 mx-4">
+    <nav className="flex flex-col md:flex-row justify-between gap-3 md:gap-0 items-center my-5 mx-4">
       <button
         title="Home"
         className="text-3xl text-lc-green"
@@ -22,6 +23,9 @@ export default function NavBar() {
         LightChange
         <span className="pl-2 dark:text-white text-bg-dark">Hub</span>
       </button>
+      <div>
+        <CardSearchBar cards={cards} />
+      </div>
       <div className="flex flex-col md:flex-row gap-2 items-center">
         {user ? (
           <span className="dark:text-text-light text-bg-dark">
