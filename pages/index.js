@@ -28,6 +28,7 @@ export const SITE_TITLE_PREFIX = "LightChange Hub -";
 export default function Home({ cards, customers }) {
   const { user, isLoading } = useContext(UserContext);
   const [isNewCardOpen, setisNewCardOpen] = useState(false);
+  const [allCards, setallCards] = useState([]);
   const [quickLinks, setquickLinks] = useState([]);
   const [otherCards, setotherCards] = useState([]);
   const [sortedCustomers, setsortedCustomers] = useState([]);
@@ -52,6 +53,7 @@ export default function Home({ cards, customers }) {
       querySnapshot.forEach((doc) => {
         fetchedCards.push(doc.data());
       });
+      setallCards(fetchedCards);
       diveyOutCards(fetchedCards);
     });
 
@@ -75,7 +77,7 @@ export default function Home({ cards, customers }) {
   }, [cards]);
 
   return (
-    <PageLayout home cards={cards}>
+    <PageLayout home cards={allCards}>
       <Head>
         <title>{SITE_TITLE_PREFIX} Dashboard</title>
       </Head>

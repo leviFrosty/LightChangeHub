@@ -66,6 +66,7 @@ export default function CardSearchBar({ cards }) {
                 <QuickLinkCard
                   title={hit.name}
                   key={hit.id}
+                  cardId={hit.id}
                   link={hit.link}
                   iconLink={hit.iconLink}
                 />
