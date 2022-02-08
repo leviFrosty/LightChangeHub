@@ -4,11 +4,12 @@ import Times from "../../public/icons/times-solid.svg";
 import QuickLinkCard from "../cards/QuickLinkCard";
 
 export default function CardSearchBar({ cards }) {
+  const [allCards, setallCards] = useState([]);
   const [search, setsearch] = useState("");
   const [hits, sethits] = useState([]);
 
   useEffect(() => {
-    const filteredCards = cards.filter((card) => {
+    const filteredCards = allCards.filter((card) => {
       // Normalized search entry
       const normalizedSearch = search.toLowerCase();
       // Search options
@@ -22,7 +23,13 @@ export default function CardSearchBar({ cards }) {
       );
     });
     sethits(filteredCards);
-  }, [search, cards]);
+  }, [search, allCards]);
+
+  useEffect(() => {
+    if (cards) {
+      setallCards(cards);
+    }
+  }, [cards]);
 
   return (
     <div className="relative w-[250px]">

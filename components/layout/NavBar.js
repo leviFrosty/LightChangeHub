@@ -23,9 +23,11 @@ export default function NavBar({ cards }) {
         LightChange
         <span className="pl-2 dark:text-white text-bg-dark">Hub</span>
       </button>
-      <div>
-        <CardSearchBar cards={cards} />
-      </div>
+      {user ? (
+        <div>
+          <CardSearchBar cards={cards} />
+        </div>
+      ) : null}
       <div className="flex flex-col md:flex-row gap-2 items-center">
         {user ? (
           <span className="dark:text-text-light text-bg-dark">
