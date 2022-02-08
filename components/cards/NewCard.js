@@ -7,6 +7,7 @@ import { doc, setDoc } from "firebase/firestore";
 import Card from "../../classes/cards/card";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import Spinner from "../Spinner";
+import validateCardLink from "../../lib/validation/validateCardLink";
 
 export default function NewCard({
   isNewCardOpen,
@@ -44,12 +45,19 @@ export default function NewCard({
     e.preventDefault();
     setisuploading(true);
     seterror("");
-    const checkcustomer = () => {
-      if (typeof card.customer === "string") return JSON.parse(card.customer);
-      return card.customer;
-    };
-    const customer = checkcustomer();
     try {
+      // Validates user input
+      const checkcustomer = () => {
+        if (typeof card.customer === "string") return JSON.parse(card.customer);
+        return card.customer;
+      };
+      const customer = checkcustomer();
+      const containsHttp = validateCardLink(card.link, seterror);
+      if (!containsHttp) {
+        setisuploading(false);
+        return;
+      }
+      // Uploads document to ref
       const storageRef = ref(storage, `cards/${customer.id}/${card.id}`);
       const uploadResult = await uploadString(
         storageRef,
