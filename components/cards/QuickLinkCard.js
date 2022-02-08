@@ -9,11 +9,11 @@ import CopySolid from "../../public/icons/copy-solid.svg";
 import { doc, deleteDoc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../lib/fbInstance";
 import { useState } from "react";
+import CopyButton from "../buttons/CopyButton";
 
 export default function QuickLinkCard({ cardId, title, link, iconLink }) {
   const [isediting, setisediting] = useState(false);
   const [editedTitle, seteditedTitle] = useState(title);
-  const [iscopied, setiscopied] = useState(false);
 
   const handleTitleSave = async () => {
     if (editedTitle === title) return;
@@ -32,7 +32,7 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
 
   return (
     <a
-      className={`relative dark:bg-bg-dark bg-slate-200 px-3 pt-4 pb-5  rounded-lg ${
+      className={`relative dark:bg-bg-dark bg-slate-200 px-3 pt-3 pb-4  rounded-lg ${
         isediting ? "hover:opacity-100" : "hover:opacity-60"
       } transition-opacity`}
       href={link}
@@ -40,54 +40,39 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
       target="_blank"
       draggable={false}
     >
-      <div className="absolute top-1 right-2 flex flex-row gap-1 items-center">
-        <div className="relative">
+      <div className="flex flex-row justify-between">
+        <div className="relative flex flex-row items-center">
+          <CopyButton link={link} />
+        </div>
+        <div className="flex flex-row gap-1 items-center">
           <button
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              navigator.clipboard.writeText(link);
-              // Enables copy state then 300ms later disables
-              setiscopied(true);
-              setTimeout(() => {
-                setiscopied(false);
-              }, 300);
+              handleTitleSave();
+              setisediting(!isediting);
             }}
-            // Creates seudo element after button to display the copy state and tooltip
-            className={`after:absolute after:-top-6 after:-left-4 after:rounded-lg after:opacity-0 hover:after:opacity-100 after:px-2 ${
-              iscopied ? "after:content-['Copied!']" : "after:content-['Copy']"
-            } after:block after:bg-lc-green after:text-text-light after:font-semibold opacity-30 hover:opacity-100 dark:text-text-light transition-opacity`}
+            className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
           >
-            <CopySolid className="w-4 h-4" />
+            {isediting ? (
+              <Floppy className="w-4 h-4" />
+            ) : (
+              <Pencil className="w-4 h-4" />
+            )}
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              deleteCard();
+            }}
+            className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
+          >
+            <Times className="w-4 h-4" />
           </button>
         </div>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            handleTitleSave();
-            setisediting(!isediting);
-          }}
-          className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
-        >
-          {isediting ? (
-            <Floppy className="w-4 h-4" />
-          ) : (
-            <Pencil className="w-4 h-4" />
-          )}
-        </button>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            deleteCard();
-          }}
-          className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
-        >
-          <Times className="w-4 h-4" />
-        </button>
       </div>
-      <div className="mt-2 flex flex-col gap-2 max-w-[200px]">
+      <div className="flex flex-col gap-2 max-w-[200px]">
         {isediting ? (
           <form
             onSubmit={(e) => {
@@ -111,7 +96,7 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
                 e.stopPropagation();
                 e.preventDefault();
               }}
-              className="hover:opacity-100 w-full active:opacity-100 rounded-lg px-1 mt-1 py-1 text-lg"
+              className="hover:opacity-100 w-full active:opacity-100 rounded-lg px-1 py-1 text-lg"
             />
           </form>
         ) : (
