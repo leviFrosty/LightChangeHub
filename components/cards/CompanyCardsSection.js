@@ -19,24 +19,26 @@ export default function CompanyCardsSection({ customer, cards }) {
   }, [cards, customer.id]);
 
   return (
-    <div className="mb-1">
-      <div>
-        <button
-          className={`transition-opacity ${
-            isopen ? "opacity-100" : "opacity-60"
-          }`}
-          onClick={() => setisopen(!isopen)}
-        >
-          <ThemeH2 className="whitespace-pre-wrap text-left">
-            {customer.name}
-            <ChevronRight
-              className={`ml-2 w-4 h-4 transition-transform inline ${
-                isopen ? "rotate-90" : "rotate-0"
-              }`}
-            />
-          </ThemeH2>
-        </button>
-      </div>
+    <div>
+      {customerCards.length !== 0 ? (
+        <div className="mb-1">
+          <button
+            className={`transition-opacity ${
+              isopen ? "opacity-100" : "opacity-60"
+            }`}
+            onClick={() => setisopen(!isopen)}
+          >
+            <ThemeH2 className="whitespace-pre-wrap text-left">
+              {customer.name}
+              <ChevronRight
+                className={`ml-2 w-4 h-4 transition-transform inline ${
+                  isopen ? "rotate-90" : "rotate-0"
+                }`}
+              />
+            </ThemeH2>
+          </button>
+        </div>
+      ) : null}
       {isopen ? (
         <React.Fragment>
           {customerCards.length === 0 ? (
