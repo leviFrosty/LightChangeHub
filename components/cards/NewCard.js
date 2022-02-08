@@ -27,7 +27,7 @@ export default function NewCard({
   const resetForm = (success) => {
     setisuploading(false);
     setcard(new Card("", "", "", "quicklinks"));
-    document.querySelector("#icon").value = "";
+    document.querySelector("#fileuploadicon").value = "";
     const obj = { ...uploadSession };
     if (success === true) {
       obj.hasAttemptedUpload = true;
@@ -189,7 +189,7 @@ export default function NewCard({
         </label>
         <ImageInput
           title="Image"
-          name="icon"
+          name="fileuploadicon"
           type="file"
           accept="image/*"
           required

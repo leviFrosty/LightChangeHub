@@ -31,17 +31,17 @@ export default function NavBar() {
         {user ? (
           <ThemeButton
             title="Sign Out"
-            className="dark:bg-bg-dark bg-slate-200"
+            className="dark:bg-bg-dark bg-slate-300"
             onClick={() => signOutUser(router)}
           >
-            <SignOutLogo className="h-6 w-6 inline dark:text-text-light text-bg-dark  hover:opacity-70" />
+            <SignOutLogo className="h-5 w-5 inline dark:text-text-light text-bg-dark  hover:opacity-70 transition-opacity" />
           </ThemeButton>
         ) : null}
         <ThemeButton
           title="Toggle Theme"
-          className="dark:bg-bg-dark bg-slate-200"
+          className="dark:bg-bg-dark bg-slate-300"
         >
-          <ToggleTheme className="h-5 w-5 dark:text-text-light text-bg-dark  hover:opacity-70" />
+          <ToggleTheme className="h-5 w-5 dark:text-text-light text-bg-dark  hover:opacity-70 transition-opacity" />
         </ThemeButton>
       </div>
     </nav>

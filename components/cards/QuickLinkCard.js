@@ -45,12 +45,12 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
             handleTitleSave();
             setisediting(!isediting);
           }}
-          className="opacity-30 hover:opacity-100 transition-opacity"
+          className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
         >
           {isediting ? (
-            <Floppy className="w-3 h-3" />
+            <Floppy className="w-4 h-4" />
           ) : (
-            <Pencil className="w-3 h-3" />
+            <Pencil className="w-4 h-4" />
           )}
         </button>
         <button
@@ -59,9 +59,9 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
             e.preventDefault();
             deleteCard();
           }}
-          className="opacity-30 hover:opacity-100 transition-opacity"
+          className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
         >
-          <Times className="w-3 h-3" />
+          <Times className="w-4 h-4" />
         </button>
       </div>
       <div className="mt-2 flex flex-col gap-2 max-w-[200px]">
@@ -99,7 +99,7 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
         <div className="relative text-text-light flex flex-row justify-center">
           {iconLink ? (
             <div className="h-12 w-12 relative">
-              <Image src={iconLink} alt={title} layout="fill" />
+              <Image priority src={iconLink} alt={title} layout="fill" />
             </div>
           ) : (
             <WarningTriangle className="h-10 text-text-light" />
