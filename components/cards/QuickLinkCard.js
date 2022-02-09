@@ -5,7 +5,6 @@ import WarningTriangle from "../../public/icons/exclamation-triangle-solid.svg";
 import Times from "../../public/icons/times-solid.svg";
 import Pencil from "../../public/icons/pencil-alt-solid.svg";
 import Floppy from "../../public/icons/save-solid.svg";
-import CopySolid from "../../public/icons/copy-solid.svg";
 import { doc, deleteDoc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../lib/fbInstance";
 import { useState } from "react";
