@@ -10,7 +10,13 @@ import { db } from "../../lib/fbInstance";
 import { useState } from "react";
 import CopyButton from "../buttons/CopyButton";
 
-export default function QuickLinkCard({ cardId, title, link, iconLink }) {
+export default function QuickLinkCard({
+  cardId,
+  title,
+  link,
+  iconLink,
+  customer,
+}) {
   const [isediting, setisediting] = useState(false);
   const [editedTitle, seteditedTitle] = useState(title);
 
@@ -113,6 +119,11 @@ export default function QuickLinkCard({ cardId, title, link, iconLink }) {
           )}
         </div>
       </div>
+      {customer ? (
+        <div className="flex flex-row justify-center dark:text-text-light text-bg-dark">
+          {customer}
+        </div>
+      ) : null}
     </a>
   );
 }
