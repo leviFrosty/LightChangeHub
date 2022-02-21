@@ -1,3 +1,5 @@
+import { useClickOutside } from "@mantine/hooks";
+import { Paper } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import SearchSolid from "../../public/icons/search-solid.svg";
 import Times from "../../public/icons/times-solid.svg";
@@ -7,6 +9,8 @@ export default function CardSearchBar({ cards }) {
   const [allCards, setallCards] = useState([]);
   const [search, setsearch] = useState("");
   const [hits, sethits] = useState([]);
+  const [opened, setOpened] = useState(false);
+  const ref = useClickOutside(() => setOpened(false));
 
   useEffect(() => {
     const filteredCards = allCards.filter((card) => {
@@ -30,6 +34,12 @@ export default function CardSearchBar({ cards }) {
       setallCards(cards);
     }
   }, [cards]);
+
+  useEffect(() => {
+    if (search !== "") {
+      setOpened(true);
+    }
+  }, [search]);
 
   return (
     <div className="relative w-[250px]">
@@ -55,8 +65,11 @@ export default function CardSearchBar({ cards }) {
           </button>
         ) : null}
       </form>
-      {search !== "" ? (
-        <div className="absolute top-10 z-10 w-full bg-bg-darker border-2 border-text-light border-opacity-50 bg-opacity-100 p-3 rounded-lg">
+      {opened && (
+        <Paper
+          ref={ref}
+          className="absolute max-h-96 overflow-y-auto overflow-x-hidden top-10 z-10 w-full bg-bg-darker border-2 border-text-light border-opacity-50 bg-opacity-100 p-3 rounded-lg"
+        >
           {hits.length == 0 ? (
             <p className="text-text-light">No cards founds</p>
           ) : null}
@@ -74,8 +87,8 @@ export default function CardSearchBar({ cards }) {
               ))}
             </div>
           ) : null}
-        </div>
-      ) : null}
+        </Paper>
+      )}
       {search !== "" ? (
         <div className="absolute right-2 top-[15%] text-bg-dark">
           <button onClick={() => setsearch("")}>
