@@ -19,11 +19,17 @@ export default function QuickLinkCard({
 }) {
   const [isediting, setisediting] = useState(false);
   const [editedTitle, seteditedTitle] = useState(title);
+  const [editedURI, setEditedURI] = useState(link);
 
   const handleTitleSave = async () => {
     if (editedTitle === title) return;
     const docRef = doc(db, "cards", cardId);
     await setDoc(docRef, { name: editedTitle }, { merge: true });
+  };
+  const handleURISave = async () => {
+    if (editedURI === link) return;
+    const docRef = doc(db, "cards", cardId);
+    await setDoc(docRef, { link: editedURI }, { merge: true });
   };
 
   const deleteCard = async () => {
@@ -55,6 +61,7 @@ export default function QuickLinkCard({
               e.stopPropagation();
               e.preventDefault();
               handleTitleSave();
+              handleURISave();
               setisediting(!isediting);
             }}
             className="opacity-30 hover:opacity-100 dark:text-text-light transition-opacity"
@@ -85,7 +92,7 @@ export default function QuickLinkCard({
               handleTitleSave();
               setisediting(!isediting);
             }}
-            className="w-full my-2"
+            className="w-full my-2 flex flex-col gap-2"
           >
             <input
               type="text"
@@ -96,6 +103,22 @@ export default function QuickLinkCard({
                   target: { value },
                 } = e;
                 seteditedTitle(value);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              className="hover:opacity-100 w-full active:opacity-100 rounded-lg px-1 py-1 text-lg"
+            />
+            <input
+              type="text"
+              value={editedURI}
+              onChange={(e) => {
+                // Sets state from input
+                const {
+                  target: { value },
+                } = e;
+                setEditedURI(value);
               }}
               onClick={(e) => {
                 e.stopPropagation();
