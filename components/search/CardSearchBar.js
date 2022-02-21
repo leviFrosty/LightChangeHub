@@ -45,6 +45,7 @@ export default function CardSearchBar({ cards }) {
     <div className="relative w-[250px]">
       <form
         onSubmit={(e) => {
+          setOpened(true);
           e.preventDefault();
         }}
       >
