@@ -59,23 +59,42 @@ export default function NewCard({
       }
       // Uploads document to ref
       const storageRef = ref(storage, `cards/${customer.id}/${card.id}`);
-      const uploadResult = await uploadString(
-        storageRef,
-        card.image,
-        "data_url"
-      );
-      const imageurl = await getDownloadURL(storageRef);
+      // If no card image provided, do not attempt to download
+      if (card.image.length == 0) {
+        const result = confirm(
+          "You are going to upload a card without an icon."
+        );
+        if (result === false) {
+          setisuploading(false);
+          return;
+        }
+      }
+      if (card.image.length !== 0) {
+        const uploadResult = await uploadString(
+          storageRef,
+          card.image,
+          "data_url"
+        );
+      }
+      let imageurl;
+      // Gets CDN url of image from storageRef if image was provided
+      if (card.image.length !== 0) {
+        imageurl = await getDownloadURL(storageRef);
+      }
+      // Abstract data from state
       const { id, name, link } = card;
+      // Creates newCard object to be uploaded to Firestore database
       const newCard = {
         id,
         name,
         link,
-        image: imageurl,
+        image: imageurl || "", // If imageurl is undefined, it will place an empty string as placeholder.
         customer: {
           id: customer.id,
           name: customer.name,
         },
       };
+      // Uploads document to Firestore database
       const firestoreRef = doc(db, "cards", id);
       setDoc(firestoreRef, newCard).then(() => {
         resetForm(true);
@@ -200,7 +219,6 @@ export default function NewCard({
           name="fileuploadicon"
           type="file"
           accept="image/*"
-          required
           state={card.image}
           handleState={setimage}
           seterror={seterror}

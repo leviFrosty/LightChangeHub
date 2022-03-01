@@ -54,7 +54,6 @@ export default function ImageInput({
         name={name}
         type="file"
         accept={accept}
-        required
         onChange={imageUpload}
         {...props}
       >
