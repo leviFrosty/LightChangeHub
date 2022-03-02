@@ -4,9 +4,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "../lib/fbInstance";
 import handleTheme from "../lib/handleTheme";
+import { NotificationsProvider } from "@mantine/notifications";
+import { MantineProvider } from "@mantine/core";
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({ user: null, isLoading: true });
+  const [currentTheme, setCurrentTheme] = useState();
 
   useEffect(() => {
     // Handles tailwindcss theme
@@ -15,6 +18,7 @@ function MyApp({ Component, pageProps }) {
     }
 
     handleTheme();
+    setCurrentTheme(localStorage.getItem("theme"));
     // Listens for auth state changes then sets global context
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -26,9 +30,13 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <UserProvider value={user}>
-      <Component {...pageProps} />
-    </UserProvider>
+    <MantineProvider theme={{ colorScheme: currentTheme }}>
+      <NotificationsProvider>
+        <UserProvider value={user}>
+          <Component {...pageProps} />
+        </UserProvider>
+      </NotificationsProvider>
+    </MantineProvider>
   );
 }
 

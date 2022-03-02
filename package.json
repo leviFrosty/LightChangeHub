@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "@mantine/core": "^3.6.9",
+    "@mantine/dropzone": "^3.6.13",
     "@mantine/hooks": "^3.6.9",
+    "@mantine/notifications": "^3.6.13",
+    "@modulz/radix-icons": "^4.0.0",
     "firebase": "^9.6.5",
     "nanoid": "^3.2.0",
     "next": "^12.1.0",

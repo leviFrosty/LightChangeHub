@@ -112,15 +112,19 @@ export default function Home({ cards, customers }) {
             <div className="flex flex-col w-full md:pr-2 md:border-r-2 border-text-light border-opacity-10">
               <ThemeH2>Quick Links</ThemeH2>
               <CardGrid>
-                {quickLinks.map((quickLink) => (
-                  <QuickLinkCard
-                    cardId={quickLink.id}
-                    key={quickLink.id}
-                    title={quickLink.name}
-                    link={quickLink.link}
-                    iconLink={quickLink.image}
-                  />
-                ))}
+                {quickLinks.map((quickLink) => {
+                  console.log(quickLink.customer);
+                  return (
+                    <QuickLinkCard
+                      cardId={quickLink.id}
+                      key={quickLink.id}
+                      title={quickLink.name}
+                      link={quickLink.link}
+                      iconLink={quickLink.image}
+                      customer={quickLink.customer}
+                    />
+                  );
+                })}
               </CardGrid>
             </div>
             <div className="flex flex-col md:pl-2 w-full">
