@@ -22,6 +22,7 @@ import CompanyCardsSection from "../components/cards/CompanyCardsSection";
 import Head from "next/head";
 import sortCardsAlphabetical from "../lib/sorting/sortCardsAlphabetical";
 import sortCustomersAlphabetical from "../lib/sorting/sortCustomerAlphabetical";
+import { firebaseAdmin } from "../lib/fbAdmin";
 export const quicklinksId = "quicklinks";
 export const SITE_TITLE_PREFIX = "LightChange Hub -";
 
@@ -147,20 +148,21 @@ export default function Home({ cards, customers }) {
 
 export async function getServerSideProps() {
   // Gets all cards from database
-  const q = query(collection(db, "cards"));
-  const querySnapshot = await getDocs(q);
-  const cards = [];
-  querySnapshot.forEach((doc) => cards.push(doc.data()));
+  const cardsRef = await firebaseAdmin.firestore().collection("cards");
+  const cardQuerySnapshot = await cardsRef.get();
+  const allCards = [];
+  cardQuerySnapshot.forEach((doc) => allCards.push(doc.data()));
   // Gets all customers from database
-  const docRef = await doc(db, "customers", "customerList");
-  const res = await getDoc(docRef);
-  const { data } = await res.data();
-
-  // Passes to component
+  const customerRef = await firebaseAdmin
+    .firestore()
+    .collection("customers")
+    .doc("customerList")
+    .get();
+  const { data: customers } = customerRef.data();
   return {
     props: {
-      cards,
-      customers: data,
+      cards: allCards,
+      customers,
     },
   };
 }

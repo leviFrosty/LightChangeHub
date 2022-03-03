@@ -14,6 +14,7 @@
     "@mantine/notifications": "^3.6.13",
     "@modulz/radix-icons": "^4.0.0",
     "firebase": "^9.6.5",
+    "firebase-admin": "^10.0.2",
     "nanoid": "^3.2.0",
     "next": "^12.1.0",
     "react": "17.0.2",
