@@ -20,7 +20,7 @@ export default function Login() {
     if (!isLoading) {
       if (user) router.replace("/");
     }
-  }, [isLoading, user]);
+  }, [isLoading, user, router]);
 
   return (
     <PageLayout>

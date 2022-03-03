@@ -63,7 +63,7 @@ export default function Home({ cards, customers }) {
 
   useEffect(() => {
     setsortedCustomers(sortCustomersAlphabetical(customers));
-  }, []);
+  }, [customers]);
 
   useEffect(() => {
     if (isLoading === false) {
@@ -161,8 +161,8 @@ export async function getServerSideProps() {
   const { data: customers } = customerRef.data();
   return {
     props: {
-      cards: allCards,
-      customers,
+      cards: allCards || [],
+      customers: customers || [],
     },
   };
 }
